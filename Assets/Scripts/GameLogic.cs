@@ -9,14 +9,15 @@ public class GameLogic : MonoBehaviour
     [SerializeField] private Color[] _shapeColors;
     [SerializeField] private GameObject _shapeSpawnPoint;
 
-    public static float dropTime = 1.0f;
-    public static float quickDropTime = 0.05f;
-    public static int width = 15, height = 30;
-    public Transform[,] grid = new Transform[height, width];
+    public float dropTime = 1.0f;
+    public float quickDropTime = 0.05f;
+    public int width = 15, height = 30;
+    public Transform[,] grid;
     public static GameLogic Instance;
     public bool IsLose { get; set; } = false;
 
     private Shape _activeShape;
+    private int _сomplicationСriterion = 10;
 
     private void Awake()
     {
@@ -27,7 +28,8 @@ public class GameLogic : MonoBehaviour
     }
 
     private void Start()
-    { 
+    {
+        grid = new Transform[height, width];
         SpawnShape();
     }
 
@@ -36,6 +38,12 @@ public class GameLogic : MonoBehaviour
         if(!_activeShape.IsMove && !IsLose)
         {
             SpawnShape();
+        }
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        { 
+            UpdateScore();
+            AddDifficultyGame();
         }
 
         CheckLines();
@@ -68,6 +76,7 @@ public class GameLogic : MonoBehaviour
             Destroy(grid[numLine, x].gameObject);
         }
         UpdateScore();
+        AddDifficultyGame();
     }
 
     private void UpdateScore()
@@ -78,6 +87,22 @@ public class GameLogic : MonoBehaviour
             GameManager.Instance.UpdateRecord();
         }
         GameManager.Instance.UpdateScoreView();
+    }
+
+    private void AddDifficultyGame()
+    {
+        if(GameManager.Instance.Score == _сomplicationСriterion)
+        {
+            if (dropTime > 0.5f)
+            {
+                dropTime -= 0.2f;
+            }
+            else if (dropTime > 0.1f)
+            {
+                dropTime -= 0.1f;
+            }
+            _сomplicationСriterion += _сomplicationСriterion;
+        }
     }
 
     private void MoveLines(int numLine)

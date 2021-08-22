@@ -22,7 +22,7 @@ public class Shape : MonoBehaviour
     private void Drop()
     {
         _timer += 1 * Time.deltaTime;
-        if (_timer >= GameLogic.dropTime)
+        if (_timer >= GameLogic.Instance.dropTime)
         {
             Move(0, -1);
             _timer = 0;
@@ -31,7 +31,7 @@ public class Shape : MonoBehaviour
 
     private void Controller()
     {
-        if (Input.GetKeyDown(KeyCode.DownArrow) && _timer >= GameLogic.quickDropTime)
+        if (Input.GetKeyDown(KeyCode.DownArrow) && _timer >= GameLogic.Instance.quickDropTime)
         {
             Move(0, -1);
             _timer = 0;
@@ -52,7 +52,7 @@ public class Shape : MonoBehaviour
 
     public void MoveDown()
     {
-        if (_timer >= GameLogic.quickDropTime)
+        if (_timer >= GameLogic.Instance.quickDropTime)
         {
             Move(0, -1);
             _timer = 0;
@@ -94,13 +94,13 @@ public class Shape : MonoBehaviour
     {
         foreach(Transform cube in _rig.transform)
         {
-            if (cube.transform.position.x >= GameLogic.width ||
+            if (cube.transform.position.x >= GameLogic.Instance.width ||
                 cube.transform.position.x < 0 ||
                 cube.transform.position.y < 0)
             {
                 return false;
             }
-            if (cube.position.y < GameLogic.height &&
+            if (cube.position.y < GameLogic.Instance.height &&
                 GameLogic.Instance.grid[Mathf.FloorToInt(cube.position.y), Mathf.FloorToInt(cube.position.x)] != null)
             {
                 return false;
@@ -113,7 +113,7 @@ public class Shape : MonoBehaviour
     {
         foreach (Transform cube in _rig.transform)
         {
-            if (cube.transform.position.y > GameLogic.height)
+            if (cube.transform.position.y > GameLogic.Instance.height)
             {
                 GameLogic.Instance.IsLose = true;
                 GameManager.Instance.WriteRecord();

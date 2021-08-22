@@ -1457,6 +1457,10 @@ MonoBehaviour:
   - {r: 1, g: 0, b: 1, a: 1}
   - {r: 0, g: 1, b: 1, a: 1}
   _shapeSpawnPoint: {fileID: 1536501291}
+  dropTime: 1
+  quickDropTime: 0.05
+  width: 15
+  height: 30
 --- !u!212 &1270868249
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2181,7 +2185,7 @@ MonoBehaviour:
     m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 60
+    m_MaxSize: 50
     m_Alignment: 4
     m_AlignByGeometry: 1
     m_RichText: 1
