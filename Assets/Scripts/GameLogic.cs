@@ -73,7 +73,11 @@ public class GameLogic : MonoBehaviour
     private void UpdateScore()
     {
         GameManager.Instance.Score += 10;
-        GameManager.Instance.UpdateScore();
+        if (GameManager.Instance.Score > GameManager.Instance.Record)
+        {
+            GameManager.Instance.UpdateRecord();
+        }
+        GameManager.Instance.UpdateScoreView();
     }
 
     private void MoveLines(int numLine)

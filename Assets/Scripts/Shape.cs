@@ -50,9 +50,23 @@ public class Shape : MonoBehaviour
         }
     }
 
+    public void MoveDown()
+    {
+        if (_timer >= GameLogic.quickDropTime)
+        {
+            Move(0, -1);
+            _timer = 0;
+        }
+    }
+
     public void Move(float newPosX, float newPosY)
     {
         transform.position += new Vector3(newPosX, newPosY, 0);
+
+        if(newPosY != 0)
+        {
+            _timer = 0;
+        }
 
         if (!CheckValid())
         { 
