@@ -40,12 +40,6 @@ public class GameLogic : MonoBehaviour
             SpawnShape();
         }
 
-        if(Input.GetKeyDown(KeyCode.Space))
-        { 
-            UpdateScore();
-            AddDifficultyGame();
-        }
-
         CheckLines();
     }
 
